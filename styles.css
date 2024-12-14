@@ -1,0 +1,40 @@
+:root {
+  --main-color: #f3f2f1;
+  --secondary-color: #7d8c84;
+  --tertiary-color: #ec221f;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  background-color: var(--main-color);
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+.lateral_bar {
+  background-color: var(--secondary-color);
+  margin: 20px 35px;
+}
