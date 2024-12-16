@@ -20,7 +20,7 @@ function addBookToLibrary(front_page, title, author, synopsis, pages, read) {
   myLibrary.push(newBook);
 }
 
-function toggleFunction() {
+function toggleFunction(event) {
   content_dropdown.classList.toggle("show");
 }
 

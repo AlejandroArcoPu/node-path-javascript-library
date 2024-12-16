@@ -30,11 +30,15 @@
         </div>
         <div class="button_menu">
           <button class="button_drop" onclick="toggleFunction()">
-            Dropdown
+            <img class="button_drop" src="./icons/menu.svg" alt="" />
           </button>
           <div class="content_dropdown">
-            <a href="#">Notifications</a>
-            <a href="#">User</a>
+            <a class="notification" href="#"
+              ><img src="./icons/notifications.svg" alt="" />Notifications
+            </a>
+            <a class="user" href="#"
+              ><img src="./icons/userProfileCircle.svg" alt="" />User
+            </a>
           </div>
         </div>
       </header>
@@ -42,6 +46,10 @@
         <div class="search">
           <img src="./icons/search.svg" alt="Search icon" />
           <input type="text" placeholder="Search for books 📚" />
+        </div>
+        <div class="books_first">
+          <h2>Your books</h2>
+          <button>Add book 📕</button>
         </div>
       </section>
     </main>
