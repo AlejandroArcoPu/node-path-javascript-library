@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Library app where you can add your own books by clicking in Add book"
+    />
     <title>MyLibrary</title>
     <script src="./script.js" defer></script>
     <link rel="stylesheet" href="./styles.css" />
@@ -51,7 +55,66 @@
           <h2>Your books</h2>
           <button>Add book 📕</button>
         </div>
+        <dialog id="favDialog">
+          <form method="dialog">
+            <p>
+              <label for="favAnimal">Favorite animal:</label>
+              <select id="favAnimal" name="favAnimal">
+                <option></option>
+                <option>Brine shrimp</option>
+                <option>Red panda</option>
+                <option>Spider monkey</option>
+              </select>
+            </p>
+            <div>
+              <button id="cancel" type="reset">Cancel</button>
+              <button type="submit">Confirm</button>
+            </div>
+          </form>
+        </dialog>
+
+        <div>
+          <button id="updateDetails">Update details</button>
+        </div>
+        <div class="books_content">
+          <article class="book_article_info">
+            <div class="first_line_info">
+              <img
+                src="https://m.media-amazon.com/images/I/61CIKpN5QjL._SL1200_.jpg"
+                alt=""
+              />
+              <button>
+                <img src="./icons/circle-cross.svg" alt="cross icon" />
+              </button>
+            </div>
+            <div class="info_content">
+              <div class="info_part_first">
+                <h3>Think and grow rich</h3>
+                <p>By <span>Napoleon Hill</span></p>
+              </div>
+              <button class="info_part synopsis">
+                <h4>Synopsis</h4>
+                <img src="./icons/angle-right.svg" alt="" />
+              </button>
+              <div class="info_part pages">
+                <h4>Pages</h4>
+                <p>256</p>
+              </div>
+              <div class="info_part read">
+                <h4>Read?</h4>
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <button class="delete">
+                Delete book<span>Irreversible action</span>
+              </button>
+            </div>
+          </article>
+        </div>
       </section>
     </main>
+    <!-- <article class="book_article_info"></article> -->
   </body>
 </html>
