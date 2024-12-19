@@ -1,7 +1,8 @@
 const myLibrary = [];
 let content_dropdown = document.querySelector(".content_dropdown");
 let books_content = document.querySelector(".books_content");
-let main = document.querySelector(".books_content");
+let bookDialog = document.querySelector(".book_dialog");
+let crossButton = document.querySelector(".cross_button");
 
 function Book(front_page, title, author, synopsis, pages, read) {
   this.front_page = front_page;
@@ -47,51 +48,18 @@ function displayBookInPage() {
   myLibrary.forEach((book) => {
     const newArticle = document.createElement("article");
     newArticle.className = "book_article";
-    newArticle.id = `${book.title}`.replace(/ /g, "");
+    newArticle.id = `updateDetails`;
+
     newArticle.style = `background-image: url(${book.front_page}); background-size: contain;`;
     books_content.appendChild(newArticle);
-    // newArticle.addEventListener("click", showBookInfo);
+    newArticle.addEventListener("click", () => {
+      bookDialog.showModal();
+    });
+
+    crossButton.addEventListener("click", () => {
+      bookDialog.close();
+    });
   });
 }
 
-// function showBookInfo(event) {
-//   const bookEvent = myLibrary.find(
-//     (book) => book.title.replace(/ /g, "") === event.target.id
-//   );
-//   const bookTitleSanitized = bookEvent.title.replace(/ /g, "");
-//   const originalArticle = document.querySelector(`#${bookTitleSanitized}`);
-//   console.log(originalArticle);
-//   const bookInfoAr = document.createElement("article");
-//   const bookTitleH2 = document.createElement("h2");
-//   bookInfoAr.classList = "book_article_info";
-//   bookTitleH2.textContent = bookEvent.title;
-//   //   bookInfoAr.appendChild(bookTitleH2);
-//   main.appendChild(bookInfoAr);
-// }
-
 displayBookInPage();
-
-const updateButton = document.getElementById("updateDetails");
-const cancelButton = document.getElementById("cancel");
-const dialog = document.getElementById("favDialog");
-dialog.returnValue = "favAnimal";
-
-function openCheck(dialog) {
-  if (dialog.open) {
-    console.log("Dialog open");
-  } else {
-    console.log("Dialog closed");
-  }
-}
-
-// Update button opens a modal dialog
-updateButton.addEventListener("click", () => {
-  dialog.showModal();
-  openCheck(dialog);
-});
-
-// Form cancel button closes the dialog box
-cancelButton.addEventListener("click", () => {
-  dialog.close("animalNotChosen");
-  openCheck(dialog);
-});

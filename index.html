@@ -34,14 +34,20 @@
         </div>
         <div class="button_menu">
           <button class="button_drop" onclick="toggleFunction()">
-            <img class="button_drop" src="./icons/menu.svg" alt="" />
+            <img class="button_drop" src="./icons/menu.svg" alt="Menu icon" />
           </button>
           <div class="content_dropdown">
             <a class="notification" href="#"
-              ><img src="./icons/notifications.svg" alt="" />Notifications
+              ><img
+                src="./icons/notifications.svg"
+                alt="Belt icon"
+              />Notifications
             </a>
             <a class="user" href="#"
-              ><img src="./icons/userProfileCircle.svg" alt="" />User
+              ><img
+                src="./icons/userProfileCircle.svg"
+                alt="User circle icon"
+              />User
             </a>
           </div>
         </div>
@@ -55,35 +61,14 @@
           <h2>Your books</h2>
           <button>Add book 📕</button>
         </div>
-        <dialog id="favDialog">
-          <form method="dialog">
-            <p>
-              <label for="favAnimal">Favorite animal:</label>
-              <select id="favAnimal" name="favAnimal">
-                <option></option>
-                <option>Brine shrimp</option>
-                <option>Red panda</option>
-                <option>Spider monkey</option>
-              </select>
-            </p>
-            <div>
-              <button id="cancel" type="reset">Cancel</button>
-              <button type="submit">Confirm</button>
-            </div>
-          </form>
-        </dialog>
-
-        <div>
-          <button id="updateDetails">Update details</button>
-        </div>
         <div class="books_content">
-          <article class="book_article_info">
+          <dialog class="book_dialog">
             <div class="first_line_info">
               <img
                 src="https://m.media-amazon.com/images/I/61CIKpN5QjL._SL1200_.jpg"
                 alt=""
               />
-              <button>
+              <button class="cross_button">
                 <img src="./icons/circle-cross.svg" alt="cross icon" />
               </button>
             </div>
@@ -94,7 +79,7 @@
               </div>
               <button class="info_part synopsis">
                 <h4>Synopsis</h4>
-                <img src="./icons/angle-right.svg" alt="" />
+                <img src="./icons/angle-right.svg" alt="angle right icon" />
               </button>
               <div class="info_part pages">
                 <h4>Pages</h4>
@@ -111,10 +96,9 @@
                 Delete book<span>Irreversible action</span>
               </button>
             </div>
-          </article>
+          </dialog>
         </div>
       </section>
     </main>
-    <!-- <article class="book_article_info"></article> -->
   </body>
 </html>
