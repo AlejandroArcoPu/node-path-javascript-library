@@ -359,6 +359,11 @@ input {
     border-radius: 8px;
   }
 
+  .synopsis_info {
+    background-color: white;
+    display: none;
+  }
+
   .synopsis {
     background-color: #e3d0e6;
     display: flex;
@@ -380,7 +385,7 @@ input {
     .switch {
       position: relative;
       display: inline-block;
-      width: 40px;
+      width: 35px;
       height: 20px;
     }
     input {
@@ -392,7 +397,7 @@ input {
       background-color: #51e816df;
     }
     input:checked + .slider:before {
-      transform: translateX(17px);
+      transform: translateX(13px);
     }
 
     .slider {
@@ -407,10 +412,10 @@ input {
       position: absolute;
       content: "";
       background-color: white;
-      height: 15px;
-      width: 15px;
-      bottom: 3px;
-      left: 4px;
+      height: 16px;
+      width: 16px;
+      bottom: 2px;
+      left: 3px;
       transition: 0.3s;
     }
     .slider.round {

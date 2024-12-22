@@ -48,18 +48,48 @@ function displayBookInPage() {
   myLibrary.forEach((book) => {
     const newArticle = document.createElement("article");
     newArticle.className = "book_article";
-    newArticle.id = `updateDetails`;
+    newArticle.id = `${book.title}`;
 
     newArticle.style = `background-image: url(${book.front_page}); background-size: contain;`;
     books_content.appendChild(newArticle);
+
     newArticle.addEventListener("click", () => {
+      //aqui tendriamos que obtener el id al click y
+      // hacer el show del dialog con el mismo id
       bookDialog.showModal();
     });
 
-    crossButton.addEventListener("click", () => {
+    crossButton.addEventListener("click", (event) => {
+      //aqui tendriamos que obtener el id al click y
+      // hacer el show del dialog con el mismo id
+      event.currentTarget.parentElement.parentElement.id;
       bookDialog.close();
     });
   });
 }
 
+function createBookDialog(img, title, author, synopsis, pages) {
+  const dialog = document.createElement("dialog");
+  dialog.className = "books_dialog";
+  dialog.id = `${title}`;
+
+  const divFirstLine = document.createElement("div");
+  divFirstLine.className = "first_line_info";
+
+  const divInfoContent = document.createElement("div");
+  divInfoContent.className = "info_content";
+}
+
 displayBookInPage();
+
+let button_synopsis = document.querySelector(".info_part.synopsis");
+let synopsis_info = document.querySelector(".synopsis_info");
+button_synopsis.addEventListener("click", () => {
+  if (synopsis_info.style.display === "block") {
+    synopsis_info.style.display = "none";
+    button_synopsis.querySelector("img").style.transform = "rotate(0deg)";
+    return;
+  }
+  button_synopsis.querySelector("img").style.transform = "rotate(90deg)";
+  synopsis_info.style.display = "block";
+});
