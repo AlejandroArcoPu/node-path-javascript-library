@@ -18,9 +18,50 @@
     />
   </head>
   <body>
-    <div class="lateral_bar"></div>
+    <header class="small_logo">
+      <div class="round_logo">
+        <div class="first_small"></div>
+        <div class="second_small"></div>
+        <div class="third_small"></div>
+      </div>
+      <div class="button_menu">
+        <button class="button_drop">
+          <img class="button_drop" src="./icons/menu.svg" alt="Menu icon" />
+        </button>
+        <div class="content_dropdown">
+          <a class="notification" href="#"
+            ><img
+              src="./icons/notifications.svg"
+              alt="Belt icon"
+            />Notifications
+          </a>
+          <a class="user" href="#"
+            ><img
+              src="./icons/userProfileCircle.svg"
+              alt="User circle icon"
+            />User
+          </a>
+        </div>
+      </div>
+    </header>
+    <div class="lateral_bar">
+      <div class="first_book">
+        <p class="first_detail">BOOK</p>
+        <p class="book_title">The Midnight Library</p>
+      </div>
+      <div class="second_book">
+        <div class="rhombus"><div class="rhombus"></div></div>
+        <p class="book_title second">DUNE</p>
+        <div class="rhombus"><div class="rhombus"></div></div>
+      </div>
+      <div class="third_book">
+        <p class="book_title">Home</p>
+        <p class="book_title">John Wik</p>
+        <div class="third_detail"></div>
+      </div>
+    </div>
     <main>
-      <header class="story">
+      <section class="header">
         <div class="title_story">
           <h3>Hello <span>Alex</span></h3>
           <h2>Keep the <span>story</span> going...</h2>
@@ -32,26 +73,7 @@
           </div>
           <p>Alex</p>
         </div>
-        <div class="button_menu">
-          <button class="button_drop" onclick="toggleFunction()">
-            <img class="button_drop" src="./icons/menu.svg" alt="Menu icon" />
-          </button>
-          <div class="content_dropdown">
-            <a class="notification" href="#"
-              ><img
-                src="./icons/notifications.svg"
-                alt="Belt icon"
-              />Notifications
-            </a>
-            <a class="user" href="#"
-              ><img
-                src="./icons/userProfileCircle.svg"
-                alt="User circle icon"
-              />User
-            </a>
-          </div>
-        </div>
-      </header>
+      </section>
       <section class="books">
         <div class="search">
           <img src="./icons/search.svg" alt="Search icon" />
@@ -59,9 +81,39 @@
         </div>
         <div class="books_first">
           <h2>Your books</h2>
-          <button>Add book 📕</button>
+          <button class="book_create_button">Add book 📕</button>
         </div>
         <div class="books_content">
+          <dialog class="book_create">
+            <div class="first_line_info">
+              <h3>Create book</h3>
+              <button class="cross_button_create">
+                <img src="./icons/circle-cross.svg" alt="cross icon" />
+              </button>
+            </div>
+            <form action="" method="post">
+              <div class="form_row">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required />
+              </div>
+              <div class="form_row">
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author" required />
+              </div>
+              <div class="form_row">
+                <label for="pages">Pages</label>
+                <input type="number" id="pages" name="pages" required />
+              </div>
+              <div class="form_row">
+                <label for="read">Read?</label>
+                <label class="switch">
+                  <input id="read" name="read" type="checkbox" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <button type="submit" class="create_button">Create book</button>
+            </form>
+          </dialog>
           <dialog class="book_dialog">
             <div class="first_line_info">
               <img
