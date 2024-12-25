@@ -90,60 +90,36 @@ main {
   align-items: end;
   font-size: 1.9vw;
   .book_title {
-    writing-mode: vertical-rl;
+    writing-mode: vertical-lr;
+    font-weight: bold;
+    color: white;
   }
-  .first_book {
-    background-color: rgb(38, 5, 139);
-    height: 80%;
-    transform: rotate(1.5deg);
+  .rotated {
+    transform: rotate(180deg);
+  }
+  .first_book,
+  .second_book,
+  .third_book {
     display: flex;
     align-items: center;
     flex-direction: column;
-    color: white;
     justify-content: space-around;
+  }
 
-    .first_detail {
-      border-top: 1px solid white;
-      border-bottom: 1px solid white;
-      width: 100%;
-      text-align: center;
-      padding: 20px;
-    }
+  .first_book {
+    background-color: #ffd580;
+    height: 80%;
+    transform: rotate(4deg);
   }
   .second_book {
-    background-color: rgb(238, 230, 11);
-    height: 100%;
-    color: #714a07;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    .second {
-      font-weight: bold;
-    }
-    .rhombus {
-      width: 10px;
-      height: 10px;
-      transform: rotate(45deg);
-      background: #714a07;
-    }
+    background-color: #002b33;
+    height: 90%;
+    transform: rotate(3deg);
   }
   .third_book {
-    background-color: rgb(243, 69, 53);
-    height: 90%;
-    transform: rotate(-2deg);
-    padding-top: 20px;
-    padding-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* align-items: center; */
-    color: #7e0303;
-    .third_detail {
-      height: 20px;
-      border-top: 3px solid #7e0303;
-      border-bottom: 3px solid #7e0303;
-    }
+    background-color: var(--tertiary-color);
+    height: 100%;
+    transform: rotate(2deg);
   }
 }
 
@@ -604,7 +580,7 @@ form {
     padding: 40px 10px;
   }
   body {
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1.2fr 5fr;
   }
 
   .button_menu {
@@ -616,7 +592,7 @@ form {
 
   .lateral_bar {
     display: grid;
-    grid-template-columns: 1fr 0.5fr 0.7fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
   .books_first h2 {
     font-size: 2.5rem;
