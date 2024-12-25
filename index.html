@@ -46,12 +46,15 @@
     </header>
     <div class="lateral_bar">
       <div class="first_book">
+        <img class="book_icon" src="./icons/heart.svg" alt="Heart icon" />
         <p class="book_title rotated">NOVEL</p>
       </div>
       <div class="second_book">
+        <img class="book_icon" src="./icons/skull.svg" alt="Skull icon" />
         <p class="book_title rotated">HORROR</p>
       </div>
       <div class="third_book">
+        <img class="book_icon" src="./icons/star.svg" alt="Star icon" />
         <p class="book_title rotated">FANTASY</p>
       </div>
     </div>
@@ -76,7 +79,7 @@
         </div>
         <div class="books_first">
           <h2>Your books</h2>
-          <button class="book_create_button">Add book 📕</button>
+          <button class="add_book_button">Add book 📕</button>
         </div>
         <div class="books_content">
           <dialog class="book_create">
@@ -86,7 +89,7 @@
                 <img src="./icons/circle-cross.svg" alt="cross icon" />
               </button>
             </div>
-            <form action="" method="post">
+            <form class="form_create">
               <div class="form_row">
                 <label for="title">Title</label>
                 <input type="text" id="title" name="title" required />
@@ -109,48 +112,6 @@
               <button type="submit" class="create_button">Create book</button>
             </form>
           </dialog>
-          <!-- <dialog class="book_dialog">
-            <div class="first_line_info">
-              <img
-                src="https://m.media-amazon.com/images/I/61CIKpN5QjL._SL1200_.jpg"
-                alt=""
-              />
-              <button class="cross_button">
-                <img src="./icons/circle-cross.svg" alt="cross icon" />
-              </button>
-            </div>
-            <div class="info_content">
-              <div class="info_part_first">
-                <h3>Think and grow rich</h3>
-                <p>By <span>Napoleon Hill</span></p>
-              </div>
-              <button class="info_part synopsis">
-                <h4>Synopsis</h4>
-                <img src="./icons/angle-right.svg" alt="angle right icon" />
-              </button>
-              <div class="synopsis_info">
-                <p>
-                  This book could be worth a million dollars to you. Andrew
-                  Carnegie attributed his great fortune to his discovery of a
-                  magic formula for success. Carnegie
-                </p>
-              </div>
-              <div class="info_part pages">
-                <h4>Pages</h4>
-                <p>256</p>
-              </div>
-              <div class="info_part read">
-                <h4>Read?</h4>
-                <label class="switch">
-                  <input type="checkbox" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <button class="delete">
-                Delete book<span>Irreversible action</span>
-              </button>
-            </div>
-          </dialog> -->
         </div>
       </section>
     </main>

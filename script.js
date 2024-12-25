@@ -3,14 +3,12 @@
 const myLibrary = [];
 let content_dropdown = document.querySelector(".content_dropdown");
 let books_content = document.querySelector(".books_content");
-// let bookDialog = document.querySelector(".book_dialog");
-// let crossButton = document.querySelector(".cross_button");
 let crossButtonCreate = document.querySelector(".cross_button_create");
-let bookCreateButton = document.querySelector(".book_create_button");
+let addBookButton = document.querySelector(".add_book_button");
 let bookCreateDialog = document.querySelector(".book_create");
 let button_synopsis = document.querySelector(".info_part.synopsis");
 let button_drop = document.querySelector(".button_drop");
-
+let formCreate = document.querySelector(".form_create");
 // CONSTRUCTORS
 
 function Book(front_page, title, author, synopsis, pages, read) {
@@ -37,17 +35,7 @@ window.onclick = (event) => {
   }
 };
 
-// button_synopsis.addEventListener("click", () => {
-//   if (synopsis_info.style.display === "block") {
-//     synopsis_info.style.display = "none";
-//     button_synopsis.querySelector("img").style.transform = "rotate(0deg)";
-//     return;
-//   }
-//   button_synopsis.querySelector("img").style.transform = "rotate(90deg)";
-//   synopsis_info.style.display = "block";
-// });
-
-bookCreateButton.addEventListener("click", () => {
+addBookButton.addEventListener("click", () => {
   bookCreateDialog.showModal();
 });
 
@@ -57,6 +45,12 @@ crossButtonCreate.addEventListener("click", () => {
 
 button_drop.addEventListener("click", () => {
   content_dropdown.classList.toggle("show");
+});
+
+formCreate.addEventListener("submit", (event) => {
+  event.preventDefault();
+  // TO DO LOGIC TO CALL TO BOOK API
+  console.log("aqui");
 });
 
 // FUNCTIONS
@@ -217,6 +211,10 @@ function createBookDialog(img, title, author, synopsis, pages) {
 
   // delete button
   const buttonDelete = document.createElement("button");
+  // TO DO DELETE ACTION
+  buttonDelete.addEventListener("click", () => {
+    console.log("aqui", title);
+  });
   buttonDelete.className = "delete";
   buttonDelete.textContent = "Delete";
   const buttonDeleteSpan = document.createElement("span");

@@ -50,7 +50,7 @@ select {
 }
 
 main {
-  padding: 15px 10px;
+  padding: 15px 20px;
 }
 
 .small_logo {
@@ -63,22 +63,10 @@ main {
   .round_logo {
     width: 50px;
     height: 50px;
-  }
-  .round_logo {
     display: grid;
-    grid-template-columns: 1fr 0.5fr 0.7fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: end;
     gap: 3px;
-    .first_small {
-      background-color: rgb(38, 5, 139);
-      transform: rotate(5deg);
-    }
-    .second_small {
-      background-color: rgb(238, 230, 11);
-    }
-    .third_small {
-      background-color: rgb(243, 69, 53);
-      transform: rotate(-5deg);
-    }
   }
 }
 
@@ -93,34 +81,41 @@ main {
     writing-mode: vertical-lr;
     font-weight: bold;
     color: white;
-  }
-  .rotated {
     transform: rotate(180deg);
   }
-  .first_book,
-  .second_book,
-  .third_book {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-around;
-  }
 
-  .first_book {
-    background-color: #ffd580;
-    height: 80%;
-    transform: rotate(4deg);
+  .book_icon {
+    width: 30px;
+    height: 30px;
   }
-  .second_book {
-    background-color: #002b33;
-    height: 90%;
-    transform: rotate(3deg);
-  }
-  .third_book {
-    background-color: var(--tertiary-color);
-    height: 100%;
-    transform: rotate(2deg);
-  }
+}
+
+.first_book,
+.second_book,
+.third_book {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.first_book,
+.first_small {
+  background-color: #ffd580;
+  height: 80%;
+  transform: rotate(4deg);
+}
+.second_book,
+.second_small {
+  background-color: #002b33;
+  height: 90%;
+  transform: rotate(3deg);
+}
+.third_book,
+.third_small {
+  background-color: var(--tertiary-color);
+  height: 100%;
+  transform: rotate(2deg);
 }
 
 .user_story {
@@ -577,7 +572,7 @@ form {
   }
   main {
     margin-left: 20px;
-    padding: 40px 10px;
+    padding: 40px 30px;
   }
   body {
     grid-template-columns: 1.2fr 5fr;
