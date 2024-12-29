@@ -75,14 +75,31 @@
       <section class="books">
         <div class="search">
           <img src="./icons/search.svg" alt="Search icon" />
-          <input type="text" placeholder="Search for books 📚" />
+          <input
+            class="input_search"
+            name="search"
+            type="text"
+            placeholder="Search for books 📚"
+          />
         </div>
         <div class="books_first">
           <h2>Your books</h2>
           <button class="add_book_button">Add book 📕</button>
         </div>
         <div class="books_content">
+          <div class="empty">
+            <p class="empty_title">Oh My...</p>
+            <p class="empty_subtitle">Looks like you need to add some books</p>
+          </div>
           <dialog class="book_create">
+            <div class="error-message">
+              <img src="./icons/error.svg" alt="Error icon" />
+              <span class="error-text">Your book is not found!</span>
+            </div>
+            <div class="success-message">
+              <img src="./icons/happy.svg" alt="Success icon" />
+              <span class="success-text">Your book is added!</span>
+            </div>
             <div class="first_line_info">
               <h3>Create book</h3>
               <button class="cross_button_create">
@@ -97,10 +114,6 @@
               <div class="form_row">
                 <label for="author">Author</label>
                 <input type="text" id="author" name="author" required />
-              </div>
-              <div class="form_row">
-                <label for="pages">Pages</label>
-                <input type="number" id="pages" name="pages" required />
               </div>
               <div class="form_row">
                 <label for="read">Read?</label>

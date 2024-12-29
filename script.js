@@ -1,14 +1,17 @@
 // VARIABLES AND DOM ELEMENTS
 
-const myLibrary = [];
-let content_dropdown = document.querySelector(".content_dropdown");
-let books_content = document.querySelector(".books_content");
-let crossButtonCreate = document.querySelector(".cross_button_create");
-let addBookButton = document.querySelector(".add_book_button");
-let bookCreateDialog = document.querySelector(".book_create");
-let button_synopsis = document.querySelector(".info_part.synopsis");
-let button_drop = document.querySelector(".button_drop");
-let formCreate = document.querySelector(".form_create");
+let myLibrary = [];
+const content_dropdown = document.querySelector(".content_dropdown");
+const books_content = document.querySelector(".books_content");
+const crossButtonCreate = document.querySelector(".cross_button_create");
+const createButton = document.querySelector(".create_button");
+const addBookButton = document.querySelector(".add_book_button");
+const bookCreateDialog = document.querySelector(".book_create");
+const button_synopsis = document.querySelector(".info_part.synopsis");
+const button_drop = document.querySelector(".button_drop");
+const formCreate = document.querySelector(".form_create");
+const emptyDiv = document.querySelector(".empty");
+
 // CONSTRUCTORS
 
 function Book(front_page, title, author, synopsis, pages, read) {
@@ -41,6 +44,7 @@ addBookButton.addEventListener("click", () => {
 
 crossButtonCreate.addEventListener("click", () => {
   bookCreateDialog.close();
+  document.querySelector(".form_create").reset();
 });
 
 button_drop.addEventListener("click", () => {
@@ -49,8 +53,71 @@ button_drop.addEventListener("click", () => {
 
 formCreate.addEventListener("submit", (event) => {
   event.preventDefault();
-  // TO DO LOGIC TO CALL TO BOOK API
-  console.log("aqui");
+  const titleNewBook = event.target.title.value
+    .replaceAll(" ", "+")
+    .toLowerCase();
+  const authorNewBook = event.target.author.value
+    .replaceAll(" ", "+")
+    .toLowerCase();
+  const readNewBook = event.target.read.checked;
+  fetch(
+    `https://openlibrary.org/search.json?title=${titleNewBook}&author=${authorNewBook}&sort=rating&language=eng&fields=key,title,author_name,number_of_pages_median,publish_year,cover_i,subject&limit=1`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      let successMessage = document.querySelector(".success-message");
+
+      let { title, author_name, number_of_pages_median, cover_i, subject } =
+        data.docs[0];
+      addBookToLibrary(
+        `https://covers.openlibrary.org/b/id/${cover_i}-M.jpg`,
+        title,
+        author_name,
+        subject.slice(0, 5),
+        number_of_pages_median,
+        readNewBook
+      );
+      displayABook(
+        `https://covers.openlibrary.org/b/id/${cover_i}-M.jpg`,
+        title,
+        author_name,
+        subject.slice(0, 5),
+        number_of_pages_median,
+        readNewBook
+      );
+      event.target.title.className = "valid";
+      event.target.author.className = "valid";
+      successMessage.style.display = "flex";
+      if (emptyDiv.style.display !== "none") {
+        emptyDiv.style.display = "none";
+      }
+      setTimeout(() => {
+        bookCreateDialog.close();
+        successMessage.style.display = "none";
+        event.target.title.className = "";
+        event.target.author.className = "";
+        document.querySelector(".form_create").reset();
+      }, 500);
+    })
+    .catch((error) => {
+      let errorMessage = document.querySelector(".error-message");
+      event.target.title.className = "invalid";
+      event.target.author.className = "invalid";
+      errorMessage.style.display = "flex";
+      setTimeout(() => {
+        errorMessage.style.display = "none";
+        event.target.title.className = "";
+        event.target.author.className = "";
+      }, 5000);
+    });
+});
+
+let inputSearch = document.querySelector(".input_search");
+inputSearch.addEventListener("input", () => {
+  let bookContainFilter = myLibrary.filter((book) =>
+    book.title.toLowerCase().includes(inputSearch.value.toLowerCase())
+  );
+  displayBooks(bookContainFilter);
 });
 
 // FUNCTIONS
@@ -60,44 +127,29 @@ function addBookToLibrary(front_page, title, author, synopsis, pages, read) {
   myLibrary.push(newBook);
 }
 
-addBookToLibrary(
-  "https://m.media-amazon.com/images/I/61CIKpN5QjL._SL1200_.jpg",
-  "Think and grow rich",
-  "Napoleon Hill",
-  "This book could be worth a million dollars to you. Andrew Carnegie attributed his great fortune to his discovery of a magic formula for success. Carnegie",
-  256,
-  true
-);
-addBookToLibrary(
-  "https://m.media-amazon.com/images/I/61CIKpN5QjL._SL1200_.jpg",
-  "Test and grow rich",
-  "Test Hill",
-  "Test Test Test",
-  2,
-  true
-);
-
-function displayBookInPage() {
-  myLibrary.forEach((book) => {
+function displayBooks(books) {
+  const bookArticles = document.querySelectorAll(".book_article");
+  const bookDialogs = document.querySelectorAll(".book_dialog");
+  bookArticles.forEach((bookArticle) => bookArticle.remove());
+  bookDialogs.forEach((bookDialog) => bookDialog.remove());
+  books.forEach((book) => {
     const newArticle = document.createElement("article");
     newArticle.className = "book_article";
-    newArticle.id = `${book.title}`;
+    newArticle.id = book.title.replaceAll(" ", "");
 
     newArticle.style = `background-image: url(${book.front_page}); background-size: contain;`;
     books_content.appendChild(newArticle);
 
-    createBookDialog(
+    const bookDialog = createBookDialog(
       book.front_page,
       book.title,
       book.author,
       book.synopsis,
-      book.pages
-    );
-
-    const bookDialog = document.getElementById(
-      `${book.title.replaceAll(" ", "+")}`
+      book.pages,
+      book.read
     );
     const crossButton = bookDialog.querySelector(".cross_button");
+    const deleteButton = bookDialog.querySelector(".delete");
     const buttonSynopsis = bookDialog.querySelector(".info_part.synopsis");
     const synopsisInfo = bookDialog.querySelector(".synopsis_info");
 
@@ -106,6 +158,11 @@ function displayBookInPage() {
     });
 
     crossButton.addEventListener("click", () => {
+      bookDialog.close();
+    });
+
+    //when delete the dialog should close
+    deleteButton.addEventListener("click", () => {
       bookDialog.close();
     });
 
@@ -121,11 +178,48 @@ function displayBookInPage() {
   });
 }
 
-function createBookDialog(img, title, author, synopsis, pages) {
+function displayABook(img, title, author, subject, pages, read) {
+  const newArticle = document.createElement("article");
+  newArticle.className = "book_article";
+  newArticle.id = title.replaceAll(" ", "");
+
+  newArticle.style = `background-image: url(${img}); background-size: contain;`;
+  books_content.appendChild(newArticle);
+
+  const bookDialog = createBookDialog(img, title, author, subject, pages, read);
+  const crossButton = bookDialog.querySelector(".cross_button");
+  const deleteButton = bookDialog.querySelector(".delete");
+  const buttonSynopsis = bookDialog.querySelector(".info_part.synopsis");
+  const synopsisInfo = bookDialog.querySelector(".synopsis_info");
+
+  newArticle.addEventListener("click", () => {
+    bookDialog.showModal();
+  });
+
+  crossButton.addEventListener("click", () => {
+    bookDialog.close();
+  });
+
+  deleteButton.addEventListener("click", () => {
+    bookDialog.close();
+  });
+
+  buttonSynopsis.addEventListener("click", () => {
+    if (synopsisInfo.style.display === "block") {
+      synopsisInfo.style.display = "none";
+      buttonSynopsis.querySelector("img").style.transform = "rotate(0deg)";
+      return;
+    }
+    buttonSynopsis.querySelector("img").style.transform = "rotate(90deg)";
+    synopsisInfo.style.display = "block";
+  });
+}
+
+function createBookDialog(img, title, author, synopsis, pages, read) {
   // create dialog
   const dialog = document.createElement("dialog");
   dialog.className = "book_dialog";
-  dialog.id = `${title.replaceAll(" ", "+")}`;
+  dialog.id = `${title.replaceAll(" ", "")}`;
 
   // first line of the dialog
   const divFirstLine = document.createElement("div");
@@ -166,7 +260,7 @@ function createBookDialog(img, title, author, synopsis, pages) {
   const synopsisButton = document.createElement("button");
   synopsisButton.className = "info_part synopsis";
   const synopsisTitle = document.createElement("h4");
-  synopsisTitle.textContent = "Synopsis";
+  synopsisTitle.textContent = "Subject";
   const synopsisImg = document.createElement("img");
   synopsisImg.src = "./icons/angle-right.svg";
   synopsisImg.alt = "Show synopsis icon";
@@ -201,6 +295,12 @@ function createBookDialog(img, title, author, synopsis, pages) {
   labelSwitch.className = "switch";
   const inputSwitch = document.createElement("input");
   inputSwitch.type = "checkbox";
+  inputSwitch.addEventListener("change", () => {
+    myLibrary.map((book) =>
+      book.title === title ? (book.read = inputSwitch.checked) : book.read
+    );
+  });
+  inputSwitch.checked = read;
   const spanSwitch = document.createElement("span");
   spanSwitch.className = "slider round";
   labelSwitch.appendChild(inputSwitch);
@@ -211,9 +311,15 @@ function createBookDialog(img, title, author, synopsis, pages) {
 
   // delete button
   const buttonDelete = document.createElement("button");
-  // TO DO DELETE ACTION
-  buttonDelete.addEventListener("click", () => {
-    console.log("aqui", title);
+  buttonDelete.addEventListener("click", (event) => {
+    let deleteElement = document.querySelectorAll(
+      `#${title.replaceAll(" ", "")}`
+    );
+    deleteElement.forEach((element) => element.remove());
+    myLibrary = myLibrary.filter((book) => book.title !== title);
+    if (myLibrary.length === 0) {
+      emptyDiv.style.display = "block";
+    }
   });
   buttonDelete.className = "delete";
   buttonDelete.textContent = "Delete";
@@ -223,6 +329,6 @@ function createBookDialog(img, title, author, synopsis, pages) {
   divInfoContent.appendChild(buttonDelete);
   dialog.appendChild(divInfoContent);
   books_content.appendChild(dialog);
-}
 
-displayBookInPage();
+  return dialog;
+}

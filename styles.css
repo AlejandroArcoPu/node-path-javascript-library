@@ -2,6 +2,7 @@
   --main-color: #f3f2f1;
   --secondary-color: #7d8c84;
   --tertiary-color: #ec221f;
+  --highlight-color: #ff7473;
 }
 
 *,
@@ -17,10 +18,8 @@ body {
   line-height: 1.5;
   background-color: var(--main-color);
   display: grid;
-  grid-template-columns: 0.8fr 5fr;
   font-family: "Inika", serif, Arial;
   padding: 0px;
-  /* overflow: hidden; */
 }
 
 img,
@@ -408,49 +407,6 @@ main {
   }
   .read {
     background-color: #d0eacb;
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 35px;
-      height: 20px;
-    }
-    input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    input:checked + .slider {
-      background-color: #51e816df;
-    }
-    input:checked + .slider:before {
-      transform: translateX(13px);
-    }
-
-    .slider {
-      position: absolute;
-      background-color: rgb(173, 173, 173);
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-    .slider:before {
-      position: absolute;
-      content: "";
-      background-color: white;
-      height: 16px;
-      width: 16px;
-      bottom: 2px;
-      left: 3px;
-      transition: 0.3s;
-    }
-    .slider.round {
-      border-radius: 34px;
-    }
-    .slider.round:before {
-      border-radius: 50%;
-    }
   }
 
   .delete {
@@ -546,9 +502,56 @@ form {
     background-color: rgb(52, 52, 52);
   }
 }
+.invalid {
+  outline: 2px solid red;
+}
+.valid {
+  outline: 2px solid green;
+}
+
+.success-message,
+.error-message {
+  display: none;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  gap: 5px;
+  img {
+    width: 20px;
+  }
+}
+
+.error-message {
+  background-color: #ffbaba;
+  border: 2px solid #d8000c;
+  color: #d8000c;
+}
+.success-message {
+  background-color: #baffbb;
+  border: 2px solid #00d82f;
+  color: #00d82f;
+}
+
+.empty {
+  margin-top: 40px;
+  position: relative;
+}
+
+.empty_title {
+  font-size: 3.5em;
+  font-weight: bold;
+}
+
+.empty_subtitle {
+  color: #8e8c8c;
+  font-weight: lighter;
+}
 
 @media screen and (min-width: 200px) {
   body {
+    grid-template-rows: 0.5fr 5fr;
     grid-template-columns: none;
   }
 }
@@ -560,8 +563,12 @@ form {
   .books_first h2 {
     font-size: 2rem;
   }
+  body {
+    grid-template-rows: 0.5fr 5fr;
+    grid-template-columns: none;
+  }
 }
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 934px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
 
   .header {
@@ -576,6 +583,7 @@ form {
   }
   body {
     grid-template-columns: 1.2fr 5fr;
+    grid-template-rows: none;
   }
 
   .button_menu {
