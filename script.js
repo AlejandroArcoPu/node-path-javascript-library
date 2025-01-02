@@ -14,18 +14,36 @@ const emptyDiv = document.querySelector(".empty");
 
 // CONSTRUCTORS
 
-function Book(front_page, title, author, synopsis, pages, read) {
-  this.front_page = front_page;
-  this.title = title;
-  this.author = author;
-  this.synopsis = synopsis;
-  this.pages = pages;
-  this.read = read;
-  this.info = function () {
+// function Book(front_page, title, author, synopsis, pages, read) {
+//   this.front_page = front_page;
+//   this.title = title;
+//   this.author = author;
+//   this.synopsis = synopsis;
+//   this.pages = pages;
+//   this.read = read;
+//   this.info = function () {
+//     return `The ${this.title} by ${this.author}, ${this.pages} pages, ${
+//       read ? "read" : "not read yet"
+//     }`;
+//   };
+// }
+
+class Book {
+  constructor(front_page, title, author, synopsis, pages, read) {
+    this.front_page = front_page;
+    this.front_page = front_page;
+    this.title = title;
+    this.author = author;
+    this.synopsis = synopsis;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  info() {
     return `The ${this.title} by ${this.author}, ${this.pages} pages, ${
-      read ? "read" : "not read yet"
+      this.read ? "read" : "not read yet"
     }`;
-  };
+  }
 }
 
 // LISTENERS
